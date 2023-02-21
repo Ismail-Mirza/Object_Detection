@@ -11,6 +11,7 @@ import cv2 #opencv
 import os
 import time
 import uuid
+import shutil
 
 
 # In[2]:
@@ -22,7 +23,15 @@ IMAGES_PATH = "Tensorflow/workspace/images/collectedimages"
 # In[3]:
 
 
-labels = ["o","r"]
+# labels = ["hello","hey"]
+# labels = ["what's up","my","name"]
+# labels = ["nice","to meet you","please","thank you"]
+# labels = ["excuse me","see you","later","goodbye","i love you","yes","no"]
+# labels = ['no sign','no human']
+# labels = [1,2,3,4,5]
+#ka ,kha,g,gh
+labels = ["g"]
+
 number_imgs=15
 
 
@@ -32,11 +41,15 @@ number_imgs=15
 # address = "http://192.168.0.101:8080/video"
 # cap.open(address)
 for label in labels:
+    label =  str(label)
+    if os.path.exists("Tensorflow/workspace/images/collectedimages/"+label):
+        shutil.rmtree("Tensorflow/workspace/images/collectedimages/"+label)
     os.mkdir("Tensorflow/workspace/images/collectedimages/"+label)
+        
     
     cap = cv2.VideoCapture(0)
     print("Collecting Images for {}".format(label))
-    time.sleep(10)
+    time.sleep(3)
     for imgnum in range(number_imgs):
         
         ret,frame = cap.read()
